@@ -3,9 +3,9 @@ import React, { type FC, useCallback, useMemo, useState } from 'react'
 import { ArrowUpOnSquareIcon, DocumentCheckIcon, ArrowLongDownIcon, CogIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { csvParse } from 'd3'
-import { type FieldError, type FieldValues, type SubmitHandler, useForm } from 'react-hook-form'
+import { type FieldError, type SubmitHandler, useForm } from 'react-hook-form'
 
-interface FormData extends FieldValues {
+interface FormValues {
   csvFile: FileList
 }
 
@@ -13,7 +13,7 @@ const FileUpload: FC<Props> = ({ onSubmit }) => {
   const [isCalculating, setIsCalculating] = useState(false)
   const { register, handleSubmit, watch, formState: { errors } } = useForm({ mode: 'all' })
 
-  const onSubmitHandler: SubmitHandler<FormData> = (data): void => {
+  const onSubmitHandler: SubmitHandler<FormValues> = data => {
     setIsCalculating(true)
     const reader = new FileReader()
     reader.onload = (e) => {
@@ -44,6 +44,7 @@ const FileUpload: FC<Props> = ({ onSubmit }) => {
   }, [getFile])
 
   return (
+    // @ts-expect-error TS complains for onSubmitHandler type definition
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     <form className="container flex flex-col items-center justify-center" onSubmit={handleSubmit(onSubmitHandler)}>
       <label
