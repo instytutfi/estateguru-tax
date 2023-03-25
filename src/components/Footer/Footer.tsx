@@ -6,6 +6,7 @@ import { GithubIcon } from 'assets/icons'
 
 const fiLink = (
   <a
+    key="fiLink"
     href="https://instytutfi.pl"
     target="_blank"
     rel="noopener noreferrer"
