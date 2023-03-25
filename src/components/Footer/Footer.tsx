@@ -1,35 +1,48 @@
 import React, { type FC, useMemo } from 'react'
 
-import { HeartIcon } from '@heroicons/react/24/solid'
+import { useTranslation } from 'react-i18next'
 
-import s from './Footer.module.css'
+import { GithubIcon } from 'assets/icons'
+
+const fiLink = (
+  <a
+    href="https://instytutfi.pl"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="border-b-2 border-b-yellow-500 hover:text-yellow-600 transition-all"
+  >
+    Instytut Fi
+  </a>
+)
 
 const Footer: FC = () => {
-  const today = useMemo(() => new Date().getFullYear(), [])
+  const { t } = useTranslation()
+  const year = useMemo(() => new Date().getFullYear(), [])
 
   return (
-    <div className="py-16 mx-auto max-w-7xl px-6 lg:px-8">
-      <p className="text-center text-gray-600 text-sm">
-        Copyleft {today}.{' '}
-        Made with <HeartIcon className="inline-block w-4 h-4 text-red-400" /> by{' '}
-        <a
-          href="https://github.com/mciszczon"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={s.Link}
-        >
-          Mateusz Ciszczoń
-        </a>/
-        <a
-          href="https://github.com/instytutfi"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={s.Link}
-        >
-          Instytut Fi
-        </a>.
-      </p>
-    </div>
+    <footer className="bg-slate-200 py-12">
+      <div className="container flex flex-col md:flex-row gap-8">
+        <div className="basis-1/2 text-sm">
+          <p className="font-medium text-slate-900">
+            {t('footer.copyright', { year, fiLink })}
+          </p>
+          <p className="my-6 text-slate-700">
+            {t('footer.oss')}
+          </p>
+          <a
+            className="inline-flex gap-2 items-center text-slate-700 font-medium hover:text-blue-600 transition-all"
+            href="https://github.com/instytutfi/estateguru-tax"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <GithubIcon className="h-5 w-5" /> Github
+          </a>
+        </div>
+        <p className="basis-1/2 text-sm text-slate-700 mt-12 md:mt-0">
+          {t('footer.disclaimer')}
+        </p>
+      </div>
+    </footer>
   )
 }
 

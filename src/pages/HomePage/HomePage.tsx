@@ -1,14 +1,14 @@
 import React, { type FC } from 'react'
 
-import { Features, Footer, Hero } from 'components'
+import { DefaultLayout } from 'layouts'
+
+import { Hero } from 'components'
 
 const HomePage: FC = () => {
   return (
-    <>
+    <DefaultLayout>
       <Hero />
-      <Features />
-      <Footer />
-    </>
+    </DefaultLayout>
   )
 }
 

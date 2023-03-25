@@ -3,7 +3,9 @@ import React, { type FC } from 'react'
 import { HomePage } from 'pages'
 
 const App: FC = () => {
-  return <HomePage />
+  return (
+    <HomePage />
+  )
 }
 
 export default App
