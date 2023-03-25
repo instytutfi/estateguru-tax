@@ -6,6 +6,6 @@ import FileUpload from './FileUpload'
 
 describe('FileUpload', () => {
   it('renders without error', async () => {
-    render(<FileUpload />)
+    render(<FileUpload onSubmit={() => null} />)
   })
 })

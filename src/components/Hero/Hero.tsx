@@ -8,7 +8,7 @@ const Hero: FC = () => {
   const { t } = useTranslation()
 
   return (
-    <section className="container py-[5vh] flex flex-col md:flex-row items-center gap-4">
+    <section className="container flex flex-col md:flex-row items-center gap-4">
       <div className="md:basis-1/2 w-[100%] py-8 md:py-12 bg-gradient-to-bl from-slate-100 to-blue-200 rounded-tl-[8rem] rounded-br-[8rem]">
         <RevenueImage className="max-h-[300px] max-w-md w-[100%] mx-auto" />
       </div>

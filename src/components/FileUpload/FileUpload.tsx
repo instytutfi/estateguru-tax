@@ -4,12 +4,14 @@ import { ArrowUpOnSquareIcon, DocumentCheckIcon, ArrowLongDownIcon, CogIcon, Exc
 import clsx from 'clsx'
 import { csvParse } from 'd3'
 import { type FieldError, type SubmitHandler, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 interface FormValues {
   csvFile: FileList
 }
 
 const FileUpload: FC<Props> = ({ onSubmit }) => {
+  const { t } = useTranslation()
   const [isCalculating, setIsCalculating] = useState(false)
   const { register, handleSubmit, watch, formState: { errors } } = useForm({ mode: 'all' })
 
@@ -40,7 +42,7 @@ const FileUpload: FC<Props> = ({ onSubmit }) => {
 
   const getFileName = useCallback((field?: FileList) => {
     const file = getFile(field)
-    return file?.name ?? 'Drop file to attach, or click to browse'
+    return file?.name ?? t('form.file.label')
   }, [getFile])
 
   return (
@@ -68,7 +70,7 @@ const FileUpload: FC<Props> = ({ onSubmit }) => {
             {
               required: true,
               validate: {
-                isCsv: (files) => files[0]?.type === 'text/csv' || 'Only CSV files are accepted'
+                isCsv: (files) => files[0]?.type === 'text/csv' ?? t('form.file.errors.format')
               }
             }
           )}
@@ -92,7 +94,7 @@ const FileUpload: FC<Props> = ({ onSubmit }) => {
         )}
         type="submit"
       >
-        <CogIcon className={clsx('w-7 h-7 mr-2', isCalculating && 'spin')} /> Calculate the Tax
+        <CogIcon className={clsx('w-7 h-7 mr-2', isCalculating && 'spin')} /> {t('form.submit.label')}
       </button>
     </form>
   )

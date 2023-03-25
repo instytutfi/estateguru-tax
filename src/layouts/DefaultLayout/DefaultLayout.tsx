@@ -6,7 +6,7 @@ const DefaultLayout: FC<Props> = ({ children = null }) => {
   return (
     <div className="min-h-[100svh] flex flex-col">
       <Navbar />
-      <main className="grow">
+      <main className="grow py-24">
         {children}
       </main>
       <Footer />
