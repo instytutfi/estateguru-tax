@@ -1,0 +1,5 @@
+{
+  "app.name": "Fi Frontend Starter",
+  "app.description": "Kickstart your next React app",
+  "counter.label": "Clicked me {count, plural, =0 {0 times} =1 {1 time} other {# times}}"
+}

@@ -1,0 +1,3 @@
+.Link {
+  @apply text-indigo-600 border-b border-b-transparent hover:text-indigo-800 hover:border-b-indigo-800 transition-all;
+}
