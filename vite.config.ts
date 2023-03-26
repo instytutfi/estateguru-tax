@@ -10,7 +10,7 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 export default defineConfig({
   base: './',
   build: {
-    outDir: 'docs'
+    outDir: 'dist'
   },
   plugins: [
     react(),

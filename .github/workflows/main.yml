@@ -11,4 +11,5 @@ jobs:
     uses: instytutfi/estateguru-tax/.github/workflows/_test.yml@main
   deploy:
     name: Deploy
-    uses: instytutfi/estateguru-tax/.github/workflows/_gh-pages.yml@main
+    needs: test
+    uses: instytutfi/estateguru-tax/.github/workflows/_deploy.yml@main

@@ -6,6 +6,6 @@ import Exposition from './Exposition'
 
 describe('Exposition', () => {
   it('renders without error', async () => {
-    render(<Exposition />)
+    render(<Exposition value="100" label="Test" important />)
   })
 })

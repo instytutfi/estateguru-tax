@@ -6,6 +6,6 @@ import Card from './Card'
 
 describe('Card', () => {
   it('renders without error', async () => {
-    render(<Card />)
+    render(<Card title="Test">Test</Card>)
   })
 })
