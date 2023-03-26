@@ -1,0 +1,14 @@
+name: Main CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Test
+    uses: instytutfi/estateguru-tax/.github/workflows/_test.yml@main
+  deploy:
+    name: Deploy
+    uses: instytutfi/estateguru-tax/.github/workflows/_gh-pages.yml@main
