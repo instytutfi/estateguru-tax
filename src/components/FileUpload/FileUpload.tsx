@@ -6,6 +6,8 @@ import { csvParse } from 'd3'
 import { type FieldError, type SubmitHandler, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
+import Button from '../Button'
+
 interface FormValues {
   csvFile: FileList
 }
@@ -48,7 +50,7 @@ const FileUpload: FC<Props> = ({ onSubmit }) => {
   return (
     // @ts-expect-error TS complains for onSubmitHandler type definition
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
-    <form className="container flex flex-col items-center justify-center" onSubmit={handleSubmit(onSubmitHandler)}>
+    <form className="section container flex flex-col items-center justify-center" onSubmit={handleSubmit(onSubmitHandler)}>
       <label
         className={clsx(
           'flex w-[100%] justify-center py-12 px-8 border-2 rounded-xl appearance-none cursor-pointer focus:outline-none transition-all',
@@ -86,16 +88,13 @@ const FileUpload: FC<Props> = ({ onSubmit }) => {
         </span>
       )}
       <ArrowLongDownIcon className="h-12 my-12 text-slate-400" />
-      <button
+      <Button
         disabled={!isFileUploaded || isCalculating || error != null}
-        className={clsx(
-          'flex items-center px-10 py-4 bg-blue-600 text-lg text-white rounded-md font-medium hover:bg-blue-800 transition-all',
-          (!isFileUploaded || isCalculating || error != null) && 'bg-slate-400 hover:bg-slate-400'
-        )}
+        icon={<CogIcon className={clsx('w-7 h-7 mr-2', isCalculating && 'spin')} />}
         type="submit"
       >
-        <CogIcon className={clsx('w-7 h-7 mr-2', isCalculating && 'spin')} /> {t('form.submit.label')}
-      </button>
+        {t('form.submit.label')}
+      </Button>
     </form>
   )
 }

@@ -21,10 +21,10 @@ const Footer: FC = () => {
   const year = useMemo(() => new Date().getFullYear(), [])
 
   return (
-    <footer className="bg-slate-200 py-12">
+    <footer className="bg-slate-300 py-12">
       <div className="container flex flex-col md:flex-row gap-8">
         <div className="basis-1/2 text-sm">
-          <p className="font-medium text-slate-900">
+          <p className="font-serif text-base text-slate-900">
             {t('footer.copyright', { year, fiLink })}
           </p>
           <p className="my-6 text-slate-700">

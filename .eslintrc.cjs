@@ -19,6 +19,7 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
+    '@typescript-eslint/no-unnecessary-type-assertion': 'off',
     'import/order': [
       1,
       {

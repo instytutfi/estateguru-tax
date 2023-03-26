@@ -8,6 +8,13 @@
   "form.file.label": "Upuść plik CSV lub kliknij, aby wybrać",
   "form.file.errors.format": "Nieprawidłowy format pliku. Plik CSV musi być wygenerowany z Estateguru.",
   "form.submit.label": "Oblicz podatek",
+  "calculation.card.title": "Twoja kalkulacja",
+  "calculation.card.description": "Poniżej znajdują się szczegóły obliczeń. Możesz pobrać plik CSV z historią inwestycji, aby przekazać go do swojego księgowego.",
+  "calculation.income.label": "Całkowity przychód",
+  "calculation.deductions.label": "Koszty i straty do odliczenia",
+  "calculation.converted.label": "Dochód po przewalutowaniu",
+  "calculation.tax.label": "Szacowana wysokość podatku",
+  "calculation.download.label": "Pobierz kalkulację",
   "footer.disclaimer": "Wyniki uzyskane za pomocą tego narzędzia należy traktować jako sugestie i nie gwarantujemy, że będą dokładnymi obliczeniami rzeczywistego dochodu z inwestycji Estateguru ani kwoty podatku dochodowego, który należy zapłacić. Zawsze konsultuj się z profesjonalnym księgowym. Twórca tego narzędzia nie bierze odpowiedzialności za obliczenia generowane przez kalkulator podatkowy Estateguru.",
   "footer.copyright": "© {year} Mateusz Ciszczoń/{fiLink}",
   "footer.oss": "Kalkulator podatkowy Estateguru jest otwartoźródłowym oprogramowaniem. Możesz pomóc go rozwijać!"
