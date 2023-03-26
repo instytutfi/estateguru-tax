@@ -1,4 +1,4 @@
-import React, { type FC, useCallback, useMemo, useState } from 'react'
+import React, { type FC, useCallback, useMemo } from 'react'
 
 import { ArrowUpOnSquareIcon, DocumentCheckIcon, ArrowLongDownIcon, CogIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
@@ -12,13 +12,11 @@ interface FormValues {
   csvFile: FileList
 }
 
-const FileUpload: FC<Props> = ({ onSubmit }) => {
+const FileUpload: FC<Props> = ({ onSubmit, isCalculating }) => {
   const { t } = useTranslation()
-  const [isCalculating, setIsCalculating] = useState(false)
   const { register, handleSubmit, watch, formState: { errors } } = useForm({ mode: 'all' })
 
   const onSubmitHandler: SubmitHandler<FormValues> = data => {
-    setIsCalculating(true)
     const reader = new FileReader()
     reader.onload = (e) => {
       const text = e?.target?.result as string
@@ -101,6 +99,7 @@ const FileUpload: FC<Props> = ({ onSubmit }) => {
 
 interface Props {
   onSubmit: (data: Array<Record<string, any>>) => any
+  isCalculating: boolean
 }
 
 export default FileUpload

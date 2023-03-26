@@ -41,6 +41,7 @@ interface StatementRow {
   paymentDate: Date
   projectName?: string
   secondaryMarket?: string
+  converted: number
 }
 
 type CsvData = Array<Record<string, any>>
