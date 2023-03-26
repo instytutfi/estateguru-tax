@@ -1,6 +1,13 @@
 import React, { type FC, useCallback, useMemo } from 'react'
 
-import { ArrowUpOnSquareIcon, DocumentCheckIcon, ArrowLongDownIcon, CogIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import {
+  ArrowUpOnSquareIcon,
+  DocumentCheckIcon,
+  ArrowLongDownIcon,
+  CogIcon,
+  ExclamationTriangleIcon,
+  ArrowPathIcon
+} from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { csvParse } from 'd3'
 import { type FieldError, type SubmitHandler, useForm } from 'react-hook-form'
@@ -12,9 +19,9 @@ interface FormValues {
   csvFile: FileList
 }
 
-const FileUpload: FC<Props> = ({ onSubmit, isCalculating }) => {
+const FileUpload: FC<Props> = ({ onSubmit, onReset, isCalculating, isCalculated }) => {
   const { t } = useTranslation()
-  const { register, handleSubmit, watch, formState: { errors } } = useForm({ mode: 'all' })
+  const { register, handleSubmit, watch, reset, formState: { errors } } = useForm({ mode: 'all' })
 
   const onSubmitHandler: SubmitHandler<FormValues> = data => {
     const reader = new FileReader()
@@ -24,6 +31,11 @@ const FileUpload: FC<Props> = ({ onSubmit, isCalculating }) => {
       onSubmit(parsed)
     }
     reader.readAsText(data.csvFile[0])
+  }
+
+  const handleReset = (): void => {
+    reset()
+    onReset()
   }
 
   const isFileUploaded = watch('csvFile')?.length > 0
@@ -55,7 +67,7 @@ const FileUpload: FC<Props> = ({ onSubmit, isCalculating }) => {
           !isFileUploaded && 'bg-slate-50 text-slate-600 border-dashed border-slate-300 hover:border-slate-500',
           (isFileUploaded && error == null) && 'bg-green-100 border-green-200 text-green-700 border-solid hover:border-green-500',
           error != null && 'bg-red-100 border-red-200 border-dashed text-red-700 hover:border-red-500',
-          isCalculating && 'pointer-events-none'
+          (isCalculating || isCalculated) && 'pointer-events-none'
         )}
       >
         <span className="flex flex-col sm:flex-row items-center gap-2">
@@ -74,7 +86,7 @@ const FileUpload: FC<Props> = ({ onSubmit, isCalculating }) => {
               }
             }
           )}
-          disabled={isCalculating}
+          disabled={isCalculating || isCalculated}
           type="file"
           accept="text/csv"
           className="hidden"
@@ -86,20 +98,33 @@ const FileUpload: FC<Props> = ({ onSubmit, isCalculating }) => {
         </span>
       )}
       <ArrowLongDownIcon className="h-12 my-12 text-slate-400" />
-      <Button
-        disabled={!isFileUploaded || isCalculating || error != null}
-        icon={<CogIcon className={clsx('w-7 h-7 mr-2', isCalculating && 'spin')} />}
-        type="submit"
-      >
-        {t('form.submit.label')}
-      </Button>
+      {!isCalculated && (
+        <Button
+          disabled={!isFileUploaded || isCalculating || error != null || isCalculated}
+          icon={<CogIcon className={clsx('w-7 h-7 mr-2', isCalculating && 'spin')} />}
+          type="submit"
+        >
+          {t('form.submit.label')}
+        </Button>
+      )}
+      {isCalculated && (
+        <Button
+          secondary
+          icon={<ArrowPathIcon className="w-7 h-7 mr-2" />}
+          onClick={handleReset}
+        >
+          {t('form.reset.label')}
+        </Button>
+      )}
     </form>
   )
 }
 
 interface Props {
   onSubmit: (data: Array<Record<string, any>>) => any
+  onReset: () => void
   isCalculating: boolean
+  isCalculated: boolean
 }
 
 export default FileUpload

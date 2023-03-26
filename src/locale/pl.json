@@ -8,6 +8,7 @@
   "form.file.label": "Upuść plik CSV lub kliknij, aby wybrać",
   "form.file.errors.format": "Nieprawidłowy format pliku. Plik CSV musi być wygenerowany z Estateguru.",
   "form.submit.label": "Oblicz podatek",
+  "form.reset.label": "Od początku",
   "calculation.card.title": "Twoja kalkulacja",
   "calculation.card.description": "Poniżej znajdują się szczegóły obliczeń. Możesz pobrać plik CSV z historią inwestycji, aby przekazać go do swojego księgowego.",
   "calculation.income.label": "Całkowity przychód",

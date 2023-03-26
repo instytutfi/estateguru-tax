@@ -12,11 +12,16 @@ import { CalculationResult, FileUpload } from 'components'
 const Calculate: FC = () => {
   const [isCalculating, setIsCalculating] = useState<boolean>(false)
   const [calculator, setCalculator] = useState<Calculator | null>(null)
-  const calculationElement = useRef<HTMLDivElement>()
+  const calculationElement = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (calculator != null) calculationElement.current?.scrollIntoView({ behavior: 'smooth' })
   }, [calculator])
+
+  const onReset = (): void => {
+    setIsCalculating(false)
+    setCalculator(null)
+  }
 
   const onCsvSubmit = async (data: CsvData): Promise<void> => {
     setIsCalculating(true)
@@ -29,13 +34,19 @@ const Calculate: FC = () => {
 
   return (
     <div>
-      <FileUpload onSubmit={onCsvSubmit} isCalculating={isCalculating} />
+      <FileUpload
+        onSubmit={onCsvSubmit}
+        onReset={onReset}
+        isCalculating={isCalculating}
+        isCalculated={calculator != null}
+      />
       <div ref={calculationElement}>
         <AnimatePresence>
           {calculator != null && (
             <motion.div
-              initial={{ opacity: 0, y: 100 }}
+              initial={{ opacity: 0, y: 200 }}
               animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -200 }}
               transition={{ duration: 0.5 }}
             >
               <CalculationResult calculator={calculator} />

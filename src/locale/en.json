@@ -8,6 +8,7 @@
   "form.file.label": "Drop file to attach, or click to browse",
   "form.file.errors.format": "Only CSV files are accepted",
   "form.submit.label": "Calculate the Tax",
+  "form.reset.label": "Reset",
   "calculation.card.title": "Your calculation",
   "calculation.card.description": "Here you can find the results of your calculation. You can download the calculation as a file.",
   "calculation.income.label": "Gross income",
