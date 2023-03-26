@@ -6,7 +6,7 @@ import { useTitle } from 'hooks/useTitle'
 
 import { DefaultLayout } from 'layouts'
 
-import { Calculate, Hero } from 'components'
+import { Calculate, Faq, Hero } from 'components'
 
 const HomePage: FC = () => {
   const { t } = useTranslation()
@@ -17,6 +17,7 @@ const HomePage: FC = () => {
     <DefaultLayout>
       <Hero />
       <Calculate />
+      <Faq />
     </DefaultLayout>
   )
 }

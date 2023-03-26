@@ -2,7 +2,7 @@ import React, { type FC, useMemo } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
-import { GithubIcon } from 'assets/icons'
+import { GithubIcon, LinkedInIcon } from 'assets/icons'
 
 const fiLink = (
   <a
@@ -27,17 +27,27 @@ const Footer: FC = () => {
           <p className="font-serif text-base text-slate-900">
             {t('footer.copyright', { year, fiLink })}
           </p>
-          <p className="my-6 text-slate-700">
+          <p className="my-6 text-slate-700 max-w-md">
             {t('footer.oss')}
           </p>
-          <a
-            className="inline-flex gap-2 items-center text-slate-700 font-medium hover:text-blue-600 transition-all"
-            href="https://github.com/instytutfi/estateguru-tax"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <GithubIcon className="h-5 w-5" /> Github
-          </a>
+          <div className="flex flex-col items-start gap-4">
+            <a
+              className="flex gap-2 items-center text-slate-700 font-medium hover:text-blue-600 transition-all"
+              href="https://github.com/instytutfi/estateguru-tax"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <GithubIcon className="h-5 w-5" /> Github
+            </a>
+            <a
+              className="flex gap-2 items-center text-slate-700 font-medium hover:text-blue-600 transition-all"
+              href="https://www.linkedin.com/company/instytut-fi/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LinkedInIcon className="h-5 w-5" /> LinkedIn
+            </a>
+          </div>
         </div>
         <p className="basis-1/2 text-sm text-slate-700 mt-12 md:mt-0">
           {t('footer.disclaimer')}

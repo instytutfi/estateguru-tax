@@ -60,7 +60,7 @@ const FileUpload: FC<Props> = ({ onSubmit, isCalculating }) => {
       >
         <span className="flex flex-col sm:flex-row items-center gap-2">
           <Icon className="w-8 h-8" />
-          <span className="font-medium break-all">
+          <span className="font-medium break-all text-center">
             {getFileName(watch('csvFile'))}
           </span>
         </span>
