@@ -8,7 +8,7 @@ import { DefaultLayout } from 'layouts'
 
 import { Calculate, Faq, Hero } from 'components'
 
-const HomePage: FC = () => {
+const Page: FC = () => {
   const { t } = useTranslation()
 
   useTitle(t('menu.home'))
@@ -22,4 +22,11 @@ const HomePage: FC = () => {
   )
 }
 
-export default HomePage
+const documentProps = {
+  title: 'Rozlicz Estateguru'
+}
+
+export {
+  Page,
+  documentProps
+}

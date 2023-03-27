@@ -5,11 +5,11 @@ import { Footer, Navbar } from 'components'
 const DefaultLayout: FC<Props> = ({ children = null }) => {
   return (
     <div className="min-h-[100svh] flex flex-col">
-      <Navbar />
+      <Navbar/>
       <main className="grow py-12 bg-slate-100">
         {children}
       </main>
-      <Footer />
+      <Footer/>
     </div>
   )
 }

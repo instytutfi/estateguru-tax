@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
-import { camelCase } from 'lodash'
+import { camelCase } from 'lodash-es'
 
 import { type CsvData, type EstateguruCsvRow, type StatementRow } from './types'
 

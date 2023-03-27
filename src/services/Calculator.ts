@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import { sortBy } from 'lodash'
+import { sortBy } from 'lodash-es'
 
 import { type StatementRow } from 'common/types'
 

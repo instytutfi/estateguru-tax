@@ -1,9 +1,9 @@
 {
-  "app.name": "Estateguru. Kalkulator podatkowy",
+  "app.name": "Rozlicz Estateguru",
   "app.description": "Łatwo oblicz kwotę podatku dochodowego od zysków z inwestycji w Estateguru",
   "menu.home": "Start",
   "menu.about": "O kalkulatorze",
-  "hero.title": "Łatwo oblicz kwotę podatku dochodowego od zysków z inwestycji w Estateguru",
+  "hero.title": "Łatwo oblicz kwotę podatku od zysków kapitałowych z inwestycji na platformie Estateguru",
   "hero.description": "Kalkulator podatkowy Estateguru pozwala na łatwe obliczenie kwoty podatku dochodowego od zysków z inwestycji w Estateguru. Wystarczy, że wgrasz plik CSV z historią inwestycji i kalkulator podatkowy Estateguru wyliczy kwotę podatku, którą należy zapłacić.",
   "form.file.label": "Upuść plik CSV lub kliknij, aby wybrać",
   "form.file.errors.format": "Nieprawidłowy format pliku. Plik CSV musi być wygenerowany z Estateguru.",
