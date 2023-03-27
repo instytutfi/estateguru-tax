@@ -1,0 +1,69 @@
+{
+  "_1421c6e3.js": {
+    "file": "assets/chunks/1421c6e3.js"
+  },
+  "_4f808778.js": {
+    "file": "assets/chunks/4f808778.js"
+  },
+  "node_modules/vite-plugin-ssr/dist/esm/client/entry.js": {
+    "dynamicImports": [
+      "src/pages/index/index.page.tsx",
+      "src/renderer/_default.page.client.tsx"
+    ],
+    "file": "assets/entry-server-routing.08cb9718.js",
+    "imports": [
+      "_4f808778.js"
+    ],
+    "isEntry": true,
+    "src": "node_modules/vite-plugin-ssr/dist/esm/client/entry.js"
+  },
+  "node_modules/vite-plugin-ssr/dist/esm/client/router/entry.js": {
+    "dynamicImports": [
+      "src/pages/index/index.page.tsx",
+      "src/renderer/_default.page.client.tsx"
+    ],
+    "file": "assets/entry-client-routing.4afba3fa.js",
+    "imports": [
+      "_4f808778.js"
+    ],
+    "isEntry": true,
+    "src": "node_modules/vite-plugin-ssr/dist/esm/client/router/entry.js"
+  },
+  "src/assets/icons/github.svg": {
+    "file": "assets/static/github.3b0d4050.svg",
+    "src": "src/assets/icons/github.svg"
+  },
+  "src/assets/icons/linkedin.svg": {
+    "file": "assets/static/linkedin.0638cd51.svg",
+    "src": "src/assets/icons/linkedin.svg"
+  },
+  "src/assets/images/revenue.svg": {
+    "file": "assets/static/revenue.c88822c0.svg",
+    "src": "src/assets/images/revenue.svg"
+  },
+  "src/pages/index/index.page.tsx": {
+    "file": "assets/src/pages/index/index.page.e0579658.js",
+    "imports": [
+      "_1421c6e3.js"
+    ],
+    "isDynamicEntry": true,
+    "isEntry": true,
+    "src": "src/pages/index/index.page.tsx"
+  },
+  "src/renderer/_default.page.client.css": {
+    "file": "assets/static/default.page.client.fb62cbd5.css",
+    "src": "src/renderer/_default.page.client.css"
+  },
+  "src/renderer/_default.page.client.tsx": {
+    "css": [
+      "assets/static/default.page.client.fb62cbd5.css"
+    ],
+    "file": "assets/src/renderer/default.page.client.3b0a61a1.js",
+    "imports": [
+      "_1421c6e3.js"
+    ],
+    "isDynamicEntry": true,
+    "isEntry": true,
+    "src": "src/renderer/_default.page.client.tsx"
+  }
+}
