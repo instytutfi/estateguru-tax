@@ -9,11 +9,15 @@ import {
   ArrowPathIcon
 } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
-import { csvParse } from 'd3'
+import { csvParse, type DSVRowArray } from 'd3'
+import dayjs from 'dayjs'
 import { type FieldError, type SubmitHandler, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
-import Button from '../Button'
+import { Button } from 'components'
+
+import { daysLimit } from './constants'
+import { validateColumns, validateDates } from './validators'
 
 interface FormValues {
   csvFile: FileList
@@ -21,14 +25,37 @@ interface FormValues {
 
 const FileUpload: FC<Props> = ({ onSubmit, onReset, isCalculating, isCalculated }) => {
   const { t } = useTranslation()
-  const { register, handleSubmit, watch, reset, formState: { errors } } = useForm({ mode: 'all' })
+  const { register, handleSubmit, watch, reset, setError, formState: { errors } } = useForm({ mode: 'all' })
+
+  const validateCsv = useCallback((data: DSVRowArray): boolean => {
+    let hasErrors = false
+
+    if (!validateColumns(data.columns)) {
+      setError(
+        'csvFile',
+        { type: 'parse', message: t('form.file.errors.structure') as string }
+      )
+      hasErrors = true
+    }
+
+    if (!validateDates(data.map(row => dayjs(row['Payment Date'], 'DD.MM.YYYY HH:mm')))) {
+      setError(
+        'csvFile',
+        { type: 'parse', message: t('form.file.errors.dates', { limit: daysLimit }) as string }
+      )
+      hasErrors = true
+    }
+
+    return hasErrors
+  }, [setError, t])
 
   const onSubmitHandler: SubmitHandler<FormValues> = data => {
     const reader = new FileReader()
     reader.onload = (e) => {
       const text = e?.target?.result as string
       const parsed = csvParse(text ?? '')
-      onSubmit(parsed)
+      const hasErrors = validateCsv(parsed)
+      if (!hasErrors) onSubmit(parsed)
     }
     reader.readAsText(data.csvFile[0])
   }
@@ -93,7 +120,7 @@ const FileUpload: FC<Props> = ({ onSubmit, onReset, isCalculating, isCalculated 
         />
       </label>
       {error != null && (
-        <span className="mt-2 text-sm text-red-700">
+        <span className="mx-auto max-w-2xl mt-4 text-red-700 text-center">
           {error.message as string}
         </span>
       )}
