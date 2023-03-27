@@ -11,9 +11,6 @@ const validateColumns = (columns: string[]): boolean => isEqual(new Set(columns)
 const validateDates = (dates: Dayjs[]): boolean => {
   const dateMin = dayjs.min(dates)
   const dateMax = dayjs.max(dates)
-
-  console.info(dateMax.diff(dateMin, 'day', true))
-
   return dateMax.diff(dateMin, 'day', true) <= daysLimit
 }
 

@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next'
 
 import { GithubIcon, LinkedInIcon } from 'assets/icons'
 
+import packageJson from '../../../package.json'
+
 const fiLink = (
   <a
     key="fiLink"
@@ -52,6 +54,11 @@ const Footer: FC = () => {
         <p className="basis-1/2 text-sm text-slate-700 mt-12 md:mt-0">
           {t('footer.disclaimer')}
         </p>
+      </div>
+      <div className="container mt-8">
+        <span className="block text-center mt-4 text-xs font-mono text-slate-500">
+          {t('app.packageName')} {packageJson.version}
+        </span>
       </div>
     </footer>
   )

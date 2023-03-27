@@ -8,6 +8,6 @@ import CalculationResult from './CalculationResult'
 
 describe('CalculationResult', () => {
   it('renders without error', async () => {
-    render(<CalculationResult calculator={new Calculator([])} />)
+    render(<CalculationResult calculator={new Calculator([], { useDeductions: false })} />)
   })
 })

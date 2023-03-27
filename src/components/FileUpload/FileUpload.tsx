@@ -14,13 +14,14 @@ import dayjs from 'dayjs'
 import { type FieldError, type SubmitHandler, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
-import { Button } from 'components'
+import { Button, Checkbox } from 'components'
 
 import { daysLimit } from './constants'
 import { validateColumns, validateDates } from './validators'
 
 interface FormValues {
   csvFile: FileList
+  useDeductions: boolean
 }
 
 const FileUpload: FC<Props> = ({ onSubmit, onReset, isCalculating, isCalculated }) => {
@@ -55,7 +56,7 @@ const FileUpload: FC<Props> = ({ onSubmit, onReset, isCalculating, isCalculated 
       const text = e?.target?.result as string
       const parsed = csvParse(text ?? '')
       const hasErrors = validateCsv(parsed)
-      if (!hasErrors) onSubmit(parsed)
+      if (!hasErrors) onSubmit(parsed, { useDeductions: data.useDeductions })
     }
     reader.readAsText(data.csvFile[0])
   }
@@ -124,6 +125,13 @@ const FileUpload: FC<Props> = ({ onSubmit, onReset, isCalculating, isCalculated 
           {error.message as string}
         </span>
       )}
+      <div className="mt-8">
+        <Checkbox
+          {...register('useDeductions')}
+          disabled={isCalculating || isCalculated}
+          label={t('form.useDeductions.label')}
+        />
+      </div>
       <ArrowLongDownIcon className="h-12 my-12 text-slate-400" />
       {!isCalculated && (
         <Button
@@ -148,10 +156,14 @@ const FileUpload: FC<Props> = ({ onSubmit, onReset, isCalculating, isCalculated 
 }
 
 interface Props {
-  onSubmit: (data: Array<Record<string, any>>) => any
+  onSubmit: (data: Array<Record<string, any>>, config: { useDeductions: boolean }) => any
   onReset: () => void
   isCalculating: boolean
   isCalculated: boolean
+}
+
+export type {
+  Props
 }
 
 export default FileUpload
