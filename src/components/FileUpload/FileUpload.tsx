@@ -9,11 +9,14 @@ import {
   ArrowPathIcon
 } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
-import { csvParse } from 'd3'
+import { csvParse, type DSVRowArray } from 'd3'
+import { isEqual } from 'lodash-es'
 import { type FieldError, type SubmitHandler, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
-import Button from '../Button'
+import { Button } from 'components'
+
+import { expectedColumns } from './constants'
 
 interface FormValues {
   csvFile: FileList
@@ -21,14 +24,29 @@ interface FormValues {
 
 const FileUpload: FC<Props> = ({ onSubmit, onReset, isCalculating, isCalculated }) => {
   const { t } = useTranslation()
-  const { register, handleSubmit, watch, reset, formState: { errors } } = useForm({ mode: 'all' })
+  const { register, handleSubmit, watch, reset, setError, formState: { errors } } = useForm({ mode: 'all' })
+
+  const validateCsv = useCallback((data: DSVRowArray): boolean => {
+    let hasErrors = false
+
+    if (!isEqual(new Set(data.columns), expectedColumns)) {
+      setError(
+        'csvFile',
+        { type: 'parse', message: t('form.file.errors.structure') as string }
+      )
+      hasErrors = true
+    }
+
+    return hasErrors
+  }, [setError, t])
 
   const onSubmitHandler: SubmitHandler<FormValues> = data => {
     const reader = new FileReader()
     reader.onload = (e) => {
       const text = e?.target?.result as string
       const parsed = csvParse(text ?? '')
-      onSubmit(parsed)
+      const hasErrors = validateCsv(parsed)
+      if (!hasErrors) onSubmit(parsed)
     }
     reader.readAsText(data.csvFile[0])
   }
