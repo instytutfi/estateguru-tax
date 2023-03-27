@@ -1,3 +1,4 @@
+import { csvFormat } from 'd3'
 import dayjs from 'dayjs'
 import { sortBy } from 'lodash-es'
 
@@ -10,12 +11,18 @@ import { type ExchangeRate } from 'api/nbp'
 const INCOME_TYPES = ['Interest', 'Indemnity', 'Penalty', 'Secondary Market']
 const DEDUCTION_TYPES = ['Sale fee', 'Secondary Market Loss']
 
+interface CalculatorConfig {
+  useDeductions: boolean
+}
+
 class Calculator {
   data: StatementRow[]
+  config: CalculatorConfig
   nbpApi = new NbpApi()
 
-  constructor (data: StatementRow[]) {
+  constructor (data: StatementRow[], config: CalculatorConfig) {
     this.data = sortBy(data, 'paymentDate')
+    this.config = config
   }
 
   async calculate (): Promise<void> {
@@ -25,9 +32,16 @@ class Calculator {
       if (exchangeRate === undefined) return row
       return {
         ...row,
+        exchangeRate: exchangeRate.mid,
+        exchangeRateDate: dayjs(exchangeRate.effectiveDate, 'YYYY-MM-DD').toDate(),
+        exchangeRateNo: exchangeRate.no,
         converted: row.amount * exchangeRate.mid
       }
     })
+  }
+
+  generateCsv (): string {
+    return csvFormat(this.data)
   }
 
   findClosestExchangeRate (exchangeRates: ExchangeRate[], statementRow: StatementRow): ExchangeRate | undefined {
@@ -85,7 +99,9 @@ class Calculator {
   }
 
   get tax (): number {
-    const basicIncome = this.convertedIncome - this.convertedDeductions
+    let basicIncome = this.convertedIncome
+    if (this.config.useDeductions) basicIncome -= this.convertedDeductions
+
     return parseFloat((basicIncome * 0.19).toFixed(2))
   }
 }

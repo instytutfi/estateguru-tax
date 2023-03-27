@@ -3,11 +3,13 @@ import React, { type FC, useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 import { adaptEstateguruCsvRow, csvKeysToCamelCase } from 'common/adapters'
-import { type CsvData, type EstateguruCsvRow } from 'common/types'
+import { type EstateguruCsvRow } from 'common/types'
 
 import { Calculator } from 'services'
 
 import { CalculationResult, FileUpload } from 'components'
+
+import { type Props as FileUploadProps } from 'components/FileUpload/FileUpload'
 
 const Calculate: FC = () => {
   const [isCalculating, setIsCalculating] = useState<boolean>(false)
@@ -23,10 +25,10 @@ const Calculate: FC = () => {
     setCalculator(null)
   }
 
-  const onCsvSubmit = async (data: CsvData): Promise<void> => {
+  const onCsvSubmit: FileUploadProps['onSubmit'] = async (data, { useDeductions }): Promise<void> => {
     setIsCalculating(true)
     const newData = csvKeysToCamelCase(data).map(row => adaptEstateguruCsvRow(row as EstateguruCsvRow))
-    const calculator = new Calculator(newData)
+    const calculator = new Calculator(newData, { useDeductions })
     await calculator.calculate()
     setCalculator(calculator)
     setIsCalculating(false)
