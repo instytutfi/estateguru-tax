@@ -1,11 +1,18 @@
-import React, { type FC } from 'react'
+import React, { type FC, type ReactNode } from 'react'
 
-import { HomePage } from 'pages'
+import { type PageContext } from '../renderer/types'
 
-const App: FC = () => {
+const App: FC<Props> = ({ children, pageContext }) => {
   return (
-    <HomePage />
+    <>
+      {children}
+    </>
   )
+}
+
+interface Props {
+  children: ReactNode
+  pageContext: PageContext
 }
 
 export default App
