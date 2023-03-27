@@ -8,6 +8,7 @@
   "form.file.label": "Upuść plik CSV lub kliknij, aby wybrać",
   "form.file.errors.format": "Nieprawidłowy format pliku. Obsługiwane są wyłącznie pliki CSV.",
   "form.file.errors.structure": "Nieprawidłowy format pliku. Upewnij się, że załączono właściwy plik wygenerowany wg instrukcji.",
+  "form.file.errors.dates": "Plik zawiera transakcje z przedziału ponad {limit} dni. Kalkulator nie obsługuje tak długiego okresu. Wygeneruj plik dla maksymalnie {limit} dni.",
   "form.submit.label": "Oblicz podatek",
   "form.reset.label": "Od początku",
   "calculation.card.title": "Twoja kalkulacja",

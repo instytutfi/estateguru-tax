@@ -1,7 +1,7 @@
 const expectedColumns = new Set([
+  'ID',
   'Secondary Market',
   'Loan Code',
-  'ID',
   'Payment Date',
   'Confirmation Date',
   'Cash Flow Type',
@@ -12,6 +12,9 @@ const expectedColumns = new Set([
   'Currency'
 ])
 
+const daysLimit = 367
+
 export {
-  expectedColumns
+  expectedColumns,
+  daysLimit
 }

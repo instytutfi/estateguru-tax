@@ -10,13 +10,14 @@ import {
 } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
 import { csvParse, type DSVRowArray } from 'd3'
-import { isEqual } from 'lodash-es'
+import dayjs from 'dayjs'
 import { type FieldError, type SubmitHandler, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
 import { Button } from 'components'
 
-import { expectedColumns } from './constants'
+import { daysLimit } from './constants'
+import { validateColumns, validateDates } from './validators'
 
 interface FormValues {
   csvFile: FileList
@@ -29,10 +30,18 @@ const FileUpload: FC<Props> = ({ onSubmit, onReset, isCalculating, isCalculated 
   const validateCsv = useCallback((data: DSVRowArray): boolean => {
     let hasErrors = false
 
-    if (!isEqual(new Set(data.columns), expectedColumns)) {
+    if (!validateColumns(data.columns)) {
       setError(
         'csvFile',
         { type: 'parse', message: t('form.file.errors.structure') as string }
+      )
+      hasErrors = true
+    }
+
+    if (!validateDates(data.map(row => dayjs(row['Payment Date'], 'DD.MM.YYYY HH:mm')))) {
+      setError(
+        'csvFile',
+        { type: 'parse', message: t('form.file.errors.dates', { limit: daysLimit }) as string }
       )
       hasErrors = true
     }
@@ -111,7 +120,7 @@ const FileUpload: FC<Props> = ({ onSubmit, onReset, isCalculating, isCalculated 
         />
       </label>
       {error != null && (
-        <span className="mt-2 text-sm text-red-700">
+        <span className="mx-auto max-w-2xl mt-4 text-red-700 text-center">
           {error.message as string}
         </span>
       )}
