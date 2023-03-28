@@ -30,7 +30,7 @@ const Faq: FC = () => {
   const { t } = useTranslation()
 
   return (
-    <div className="section">
+    <div className="section my-16">
       <div className="container-xs">
         <h2 className="text-2xl md:text-4xl text-center font-serif mb-8">
           {t('faq.title')}
