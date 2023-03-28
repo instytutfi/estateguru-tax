@@ -36,6 +36,7 @@ async function render (pageContext: PageContextServer): Promise<Record<string, a
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="${desc}" />
     <title>${title}</title>
+    <script async defer src="https://analytics.umami.is/script.js" data-website-id="6b7ce506-f991-460e-8dc5-cd4cc3d16ff9"></script>
   </head>
   <body>
     <div id="root">${dangerouslySkipEscape(pageHtml)}</div>
