@@ -10,7 +10,7 @@
       "src/pages/index/index.page.tsx",
       "src/renderer/_default.page.client.tsx"
     ],
-    "file": "assets/entry-server-routing.42683740.js",
+    "file": "assets/entry-server-routing.1d1d746e.js",
     "imports": [
       "_4f808778.js"
     ],
@@ -22,7 +22,7 @@
       "src/pages/index/index.page.tsx",
       "src/renderer/_default.page.client.tsx"
     ],
-    "file": "assets/entry-client-routing.4359f0b5.js",
+    "file": "assets/entry-client-routing.e7cde811.js",
     "imports": [
       "_4f808778.js"
     ],
@@ -42,7 +42,7 @@
     "src": "src/assets/images/revenue.svg"
   },
   "src/pages/index/index.page.tsx": {
-    "file": "assets/src/pages/index/index.page.5f7c663c.js",
+    "file": "assets/src/pages/index/index.page.1b75012d.js",
     "imports": [
       "_1421c6e3.js"
     ],
