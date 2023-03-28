@@ -37,14 +37,14 @@ const Calculate: FC = () => {
     setIsCalculating(true)
     try {
       const newData = csvKeysToCamelCase(data).map(row => adaptEstateguruCsvRow(row as EstateguruCsvRow))
-      const calculator = new Calculator(newData, { useDeductions })
-      await calculator.calculate()
+      const calc = new Calculator(newData, { useDeductions })
+      await calc.calculate()
+      setCalculator(calc)
     } catch (e) {
       setError(e)
       setIsCalculating(false)
       return
     }
-    setCalculator(calculator)
     setIsCalculating(false)
   }
 
