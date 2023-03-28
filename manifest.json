@@ -10,7 +10,7 @@
       "src/pages/index/index.page.tsx",
       "src/renderer/_default.page.client.tsx"
     ],
-    "file": "assets/entry-server-routing.e2339b8b.js",
+    "file": "assets/entry-server-routing.42683740.js",
     "imports": [
       "_4f808778.js"
     ],
@@ -22,7 +22,7 @@
       "src/pages/index/index.page.tsx",
       "src/renderer/_default.page.client.tsx"
     ],
-    "file": "assets/entry-client-routing.e7406749.js",
+    "file": "assets/entry-client-routing.4359f0b5.js",
     "imports": [
       "_4f808778.js"
     ],
@@ -42,7 +42,7 @@
     "src": "src/assets/images/revenue.svg"
   },
   "src/pages/index/index.page.tsx": {
-    "file": "assets/src/pages/index/index.page.e6586914.js",
+    "file": "assets/src/pages/index/index.page.5f7c663c.js",
     "imports": [
       "_1421c6e3.js"
     ],
@@ -51,14 +51,14 @@
     "src": "src/pages/index/index.page.tsx"
   },
   "src/renderer/_default.page.client.css": {
-    "file": "assets/static/default.page.client.4c94c959.css",
+    "file": "assets/static/default.page.client.5337d27f.css",
     "src": "src/renderer/_default.page.client.css"
   },
   "src/renderer/_default.page.client.tsx": {
     "css": [
-      "assets/static/default.page.client.4c94c959.css"
+      "assets/static/default.page.client.5337d27f.css"
     ],
-    "file": "assets/src/renderer/default.page.client.e2a6685f.js",
+    "file": "assets/src/renderer/default.page.client.784fc5b5.js",
     "imports": [
       "_1421c6e3.js"
     ],
