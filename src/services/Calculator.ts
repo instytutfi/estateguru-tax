@@ -1,15 +1,15 @@
+import { type AxiosError } from 'axios'
 import { csvFormat } from 'd3'
 import dayjs from 'dayjs'
 import { sortBy } from 'lodash-es'
 
-import { type StatementRow } from 'common/types'
+import { DEDUCTION_TYPES, INCOME_TYPES } from 'common/constants'
+import { CalculationError } from 'common/exceptions'
+import { type EstateguruCashFlowType, type StatementRow } from 'common/types'
 
 import { NbpApi } from 'api'
 
 import { type ExchangeRate } from 'api/nbp'
-
-const INCOME_TYPES = ['Interest', 'Indemnity', 'Penalty', 'Secondary Market']
-const DEDUCTION_TYPES = ['Sale fee', 'Secondary Market Loss']
 
 interface CalculatorConfig {
   useDeductions: boolean
@@ -26,18 +26,33 @@ class Calculator {
   }
 
   async calculate (): Promise<void> {
-    const exchangeRates = await this.nbpApi.getCurrencyRateForDates('EUR', ...this.datePeriod)
-    this.data = this.data.map(row => {
-      const exchangeRate = this.findClosestExchangeRate(exchangeRates.data.rates, row)
-      if (exchangeRate === undefined) return row
-      return {
-        ...row,
-        exchangeRate: exchangeRate.mid,
-        exchangeRateDate: dayjs(exchangeRate.effectiveDate, 'YYYY-MM-DD').toDate(),
-        exchangeRateNo: exchangeRate.no,
-        converted: row.amount * exchangeRate.mid
-      }
-    })
+    const exchangeRates = (
+      await this.nbpApi.getCurrencyRateForDates('EUR', ...this.datePeriod)
+        .catch((e: AxiosError) => {
+          throw new CalculationError(
+            'calculation.errors.nbpApiError.title',
+            e?.response?.data as string ?? 'calculation.errors.nbpApiError.genericDescription'
+          )
+        })
+    )
+    try {
+      this.data = this.data.map(row => {
+        const exchangeRate = this.findClosestExchangeRate(exchangeRates.data.rates, row)
+        if (exchangeRate === undefined) return row
+        return {
+          ...row,
+          exchangeRate: exchangeRate.mid,
+          exchangeRateDate: dayjs(exchangeRate.effectiveDate, 'YYYY-MM-DD').toDate(),
+          exchangeRateNo: exchangeRate.no,
+          converted: row.amount * exchangeRate.mid
+        }
+      })
+    } catch (e) {
+      throw new CalculationError(
+        'calculation.errors.generic.title',
+        'calculation.errors.generic.description'
+      )
+    }
   }
 
   generateCsv (): string {
@@ -55,6 +70,18 @@ class Calculator {
     }, undefined)
   }
 
+  isProfitType (transactionType: EstateguruCashFlowType): boolean {
+    return INCOME_TYPES.some(
+      incomeType => incomeType.toLowerCase() === transactionType.toLowerCase()
+    )
+  }
+
+  isDeductible (transactionType: EstateguruCashFlowType): boolean {
+    return DEDUCTION_TYPES.some(
+      incomeType => incomeType.toLowerCase() === transactionType.toLowerCase()
+    )
+  }
+
   get datePeriod (): [string, string] {
     return [
       dayjs(this.data[0].paymentDate).format('YYYY-MM-DD'),
@@ -65,7 +92,7 @@ class Calculator {
   get totalIncome (): number {
     return parseFloat(
       this.data
-        .filter(row => INCOME_TYPES.includes(row.cashFlowType))
+        .filter(row => this.isProfitType(row.cashFlowType))
         .reduce((prev, row) => prev + row.amount, 0)
         .toFixed(2)
     )
@@ -74,7 +101,7 @@ class Calculator {
   get deductions (): number {
     return parseFloat(
       this.data
-        .filter(row => DEDUCTION_TYPES.includes(row.cashFlowType))
+        .filter(row => this.isDeductible(row.cashFlowType))
         .reduce((prev, row) => prev + -row.amount, 0)
         .toFixed(2)
     )
@@ -83,7 +110,7 @@ class Calculator {
   get convertedIncome (): number {
     return parseFloat(
       this.data
-        .filter(row => INCOME_TYPES.includes(row.cashFlowType))
+        .filter(row => this.isProfitType(row.cashFlowType))
         .reduce((prev, row) => prev + row.converted, 0)
         .toFixed(2)
     )
@@ -92,7 +119,7 @@ class Calculator {
   get convertedDeductions (): number {
     return parseFloat(
       this.data
-        .filter(row => DEDUCTION_TYPES.includes(row.cashFlowType))
+        .filter(row => this.isDeductible(row.cashFlowType))
         .reduce((prev, row) => prev + -row.converted, 0)
         .toFixed(2)
     )

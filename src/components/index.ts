@@ -1,6 +1,7 @@
 /* eslint-disable sort-imports, import/order */
 
 /* PLOP_INJECT_EXPORT */
+export { default as Alert } from './Alert'
 export { default as Checkbox } from './Checkbox'
 export { default as Faq } from './Faq'
 export { default as Calculate } from './Calculate'
