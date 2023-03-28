@@ -8,6 +8,8 @@ import 'config/i18n'
 
 import App from 'App'
 
+import packageJson from '../../package.json'
+
 import type { PageContextClient } from './types'
 
 import './base.css'
@@ -15,7 +17,8 @@ import './base.css'
 Sentry.init({
   dsn: 'https://5482f948da1641368a1bfc825448b956@o552270.ingest.sentry.io/4504917691662336',
   integrations: [new BrowserTracing()],
-  tracesSampleRate: 1.0
+  tracesSampleRate: 1.0,
+  release: `${packageJson.version}`
 })
 
 async function render (pageContext: PageContextClient): Promise<void> {
