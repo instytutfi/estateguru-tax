@@ -2,15 +2,15 @@
   "_4f808778.js": {
     "file": "assets/chunks/4f808778.js"
   },
-  "_77d2dd68.js": {
-    "file": "assets/chunks/77d2dd68.js"
+  "_9098db1d.js": {
+    "file": "assets/chunks/9098db1d.js"
   },
   "node_modules/vite-plugin-ssr/dist/esm/client/entry.js": {
     "dynamicImports": [
       "src/pages/index/index.page.tsx",
       "src/renderer/_default.page.client.tsx"
     ],
-    "file": "assets/entry-server-routing.e300cdff.js",
+    "file": "assets/entry-server-routing.6a709e7e.js",
     "imports": [
       "_4f808778.js"
     ],
@@ -22,7 +22,7 @@
       "src/pages/index/index.page.tsx",
       "src/renderer/_default.page.client.tsx"
     ],
-    "file": "assets/entry-client-routing.185427be.js",
+    "file": "assets/entry-client-routing.faee8862.js",
     "imports": [
       "_4f808778.js"
     ],
@@ -42,25 +42,25 @@
     "src": "src/assets/images/revenue.svg"
   },
   "src/pages/index/index.page.tsx": {
-    "file": "assets/src/pages/index/index.page.d747ef67.js",
+    "file": "assets/src/pages/index/index.page.a3416c14.js",
     "imports": [
-      "_77d2dd68.js"
+      "_9098db1d.js"
     ],
     "isDynamicEntry": true,
     "isEntry": true,
     "src": "src/pages/index/index.page.tsx"
   },
   "src/renderer/_default.page.client.css": {
-    "file": "assets/static/default.page.client.5337d27f.css",
+    "file": "assets/static/default.page.client.afc216a6.css",
     "src": "src/renderer/_default.page.client.css"
   },
   "src/renderer/_default.page.client.tsx": {
     "css": [
-      "assets/static/default.page.client.5337d27f.css"
+      "assets/static/default.page.client.afc216a6.css"
     ],
-    "file": "assets/src/renderer/default.page.client.dee968dc.js",
+    "file": "assets/src/renderer/default.page.client.e6c25267.js",
     "imports": [
-      "_77d2dd68.js"
+      "_9098db1d.js"
     ],
     "isDynamicEntry": true,
     "isEntry": true,
