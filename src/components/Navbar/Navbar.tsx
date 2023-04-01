@@ -6,6 +6,8 @@ import { useTranslation } from 'react-i18next'
 
 import { GithubIcon } from 'assets/icons'
 
+import { LanguageSwitcher } from 'components'
+
 const Navbar: FC = () => {
   const { t } = useTranslation()
   const [isLogoHovered, setIsLogoHovered] = useState<boolean>(false)
@@ -26,14 +28,17 @@ const Navbar: FC = () => {
                 {t('app.name')}
               </span>
             </a>
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://github.com/instytutfi/estateguru-tax"
-              className="text-slate-500 hover:text-white transition-all"
-            >
-              <GithubIcon className="h-6 w-6" />
-            </a>
+            <div className="flex items-center gap-8">
+              <LanguageSwitcher />
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/instytutfi/estateguru-tax"
+                className="text-slate-500 hover:text-white transition-all"
+              >
+                <GithubIcon className="h-6 w-6" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
